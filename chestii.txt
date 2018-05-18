@@ -1,0 +1,68 @@
+
+----MODELS------------------------------------------------------------------------------------------------------------------
+
+-source of info about the data
+
+-contains fields and data
+
+-each model maps a single db table
+
+-need to add the module that contains the model.py to settings file in INSTALLED_APPS
+
+-assigning foreignKey in the class
+
+
+
+
+----VIEW---------------------------------------------------------------------------------------------------------------------
+
+- a fct that takes a web request and return a web response
+
+- response can be anything
+
+
+
+
+----FORMS--------------------------------------------------------------------------------------------------------------------
+
+-https://docs.djangoproject.com/en/2.0/topics/forms/
+
+-from django import forms
+
+-In HTML a form is a collection of elem inside <form> shituri </form>
+
+-ex: checkboxes, date pickere etc
+
+-GET, POST
+
+-POST: browser bundels up ther data, encodes, sends to server and receives back the response
+
+-GET: bundels the submitted data into a string, uses it to compose a URL(cont the data where the must be sent, keys, values)
+
+-Changes the system -> POST, doesn't affect the sys -> GET
+
+-Don't use GET for: passwords(because it forms the URL)
+					big data
+					binary data(like img)
+
+-ALWAYS send crf_token when modif db
+
+
+
+
+----DB Relationships-------------------------------------------------------------------------------------------------------
+
+-One-to-Many - by using a foreign key 
+
+-Many-to-Many, One-to-One - defined, doesn't matter on which side
+
+-{% for course in student.course_set.all %}
+ reverse site, many to many on course -> student side is reverse -> django names is automatically student.course_set...
+
+-courses -> views 
+	-courses = Course.objects.prefetch_related('students')
+	-avoiding n+1 querrys problem
+
+       1       n         1       n          1       n
+Course --------> Section --------> Question --------> Answer
+
